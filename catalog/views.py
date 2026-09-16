@@ -10,7 +10,7 @@ def index(request):
     num_books = Book.objects.all().count()
     num_instances = BookInstance.objects.all().count()
     num_books_great = Book.objects.filter(title__contains="great").count()
-    num_books_american = Book.objects.filter(genre__name__icontains='american').count()
+    num_books_american = Genre.objects.filter(name__icontains='american').count()
     
 
     # Available books (status = 'a')
