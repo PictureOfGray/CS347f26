@@ -1,0 +1,33 @@
+{% extends "base_generic.html" %}
+
+<!-- Add additional CSS in static file -->
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+
+{% load static %}
+{% static '2010-kodiak-bear-1.jpeg' %}
+
+{% block title %}
+    Welcome to books!
+{% endblock %}
+
+
+{% block content %}
+  <h1>Local Library Home</h1>
+  <p>
+    Welcome to LocalLibrary, a website developed by
+    <em>Mozilla Developer Network</em>!
+  </p>
+  <h2>Dynamic content</h2>
+  <p>The library has the following record counts:</p>
+  <ul>
+    <li><strong>Books:</strong> {{ num_books }}</li>
+    <li><strong>Books containing the word "Great":</strong> {{ num_books_great }}</li>
+    <li><strong>Books whose genre has something to do with America:</strong> {{ num_books_american }}</li>
+    <li><strong>Copies:</strong> {{ num_instances }}</li>
+    <li><strong>Copies available:</strong> {{ num_instances_available }}</li>
+    <li><strong>Authors:</strong> {{ num_authors }}</li>
+  </ul>
+  <img src="https://w3.cs.jmu.edu/cs347/f26/stewart.jpeg" alt="Dr. Stewart rockin' that Carolina Blue koy Kahala">
+  <img src="{% static '2010-kodiak-bear-1.jpeg' %}" alt="Kodiak">
+{% endblock %}
