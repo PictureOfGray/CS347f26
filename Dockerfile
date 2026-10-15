@@ -19,7 +19,7 @@ COPY . .
 
 # Runs at build time, against the SQLite default — no database is reachable
 # here, and collectstatic does not need one.
-RUN python manage.py collectstatic --noinput
+RUN REDIS_URL=redis://build-placeholder:6379 python manage.py collectstatic --noinput
 
 # migrate on start is safe to repeat and keeps deploys to one command. Each app
 # owns its own database, so there is no cross-app migration race.
