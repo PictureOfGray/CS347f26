@@ -19,8 +19,11 @@
     <script>
         const roomName = JSON.parse(document.getElementById('room-name').textContent);
 
+        // Use wss:// when the page was loaded over https://, otherwise ws://
+        const wsScheme = window.location.protocol === 'https:' ? 'wss://' : 'ws://';
+
         const chatSocket = new WebSocket(
-            'ws://'
+            wsScheme
             + window.location.host
             + '/ws/chat/'
             + roomName
