@@ -92,12 +92,17 @@ WSGI_APPLICATION = 'locallibrary_config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+# locallibrary_config/settings.py
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+        'TEST': {
+            'NAME': BASE_DIR / 'test_db.sqlite3',
+        },
+    }
+}
+
 
 
 # Password validation
@@ -161,6 +166,7 @@ CHANNEL_LAYERS = {
         },
     },
 }
+
 
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=["localhost", "127.0.0.1"])
 CSRF_TRUSTED_ORIGINS = env.list("CSRF_TRUSTED_ORIGINS", default=[])
