@@ -39,6 +39,16 @@ urlpatterns += [
     path('', RedirectView.as_view(url='catalog/')),
 ]
 
+# locallibrary_config/urls.py
+# (after the existing blocks)
+# Mount the Django Ninja API
+from .api import api
+
+urlpatterns += [
+    path('api/', api.urls),
+]
+
+
 # Use static() to add URL mapping to serve static files during development (only)
 from django.conf import settings
 from django.conf.urls.static import static
