@@ -16,6 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from .api import api
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -32,6 +33,11 @@ urlpatterns += [
 urlpatterns += [
     path('chat/', include('chat.urls')),
 ]
+
+urlpatterns += [
+        path('api/', api.urls),
+    ]
+
 
 # Add URL maps to redirect the base URL to our application
 from django.views.generic import RedirectView
