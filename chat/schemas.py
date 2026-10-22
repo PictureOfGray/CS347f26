@@ -1,10 +1,12 @@
 from ninja import ModelSchema
-from ninja import NinjaAPI
-from ninja import Schema, Status
-from django.shortcuts import get_object_or_404
+from ninja import Schema
 from chat.models import Room
-from ninja.pagination import paginate
-from ninja import Router
+from chat.models import Message
+from datetime import timedelta
+from typing import Annotated
+from django.db.models import Q
+from django.utils import timezone
+from ninja import FilterLookup, FilterSchema, Query
 
 class RoomIn(ModelSchema):
     class Meta:
