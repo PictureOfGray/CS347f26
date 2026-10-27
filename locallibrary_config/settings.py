@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/6.1/ref/settings/
 from pathlib import Path
 import environ
 import environ
+import os
 
 env = environ.Env()
 
@@ -56,6 +57,8 @@ INSTALLED_APPS = [
     'catalog.apps.CatalogConfig', # This object was created for us in /catalog/apps.py
     'chat',
     'ninja',
+    'allauth',
+    'allauth.account',
 ]
 
 
@@ -68,6 +71,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'locallibrary_config.urls'
@@ -75,7 +79,7 @@ ROOT_URLCONF = 'locallibrary_config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -174,3 +178,16 @@ CSRF_TRUSTED_ORIGINS = env.list("CSRF_TRUSTED_ORIGINS", default=[])
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
+# django-allauth
+AUTHENTICATION_BACKENDS = [
+    # Logs users in by username or by email address. It extends Django's
+    # ModelBackend, so the admin site and permissions work as before.
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+ACCOUNT_LOGIN_METHODS = {'username', 'email'}
+ACCOUNT_SIGNUP_FIELDS = ['email*', 'username*', 'password1*', 'password2*']
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+
+# Redirect to home URL after login (Default redirects to /accounts/profile/)
+LOGIN_REDIRECT_URL = '/'
