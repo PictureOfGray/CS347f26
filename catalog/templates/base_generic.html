@@ -29,6 +29,10 @@
 
                 <li><a href="{% url 'my-borrowed' %}">My Borrowed</a></li>
 
+                {% if perms.catalog.can_mark_returned %}
+                <li><a href="{% url 'borrowed' %}">All Borrowed</a></li>
+                {% endif %}
+
                 <li>
                     <form id="logout-form" method="post" action="{% url 'account_logout' %}">
                     {% csrf_token %}
